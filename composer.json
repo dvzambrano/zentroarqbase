@@ -1,0 +1,18 @@
+{
+    "name": "administrador/zentro-sg-arq-base",
+    "authors": [
+        {
+            "name": "Donel Vazquez Zambrano",
+            "email": "dvzambrano@gmail.com"
+        }
+    ],
+    "require": {
+        "friendsofsymfony1/symfony1": "1.5.*",
+        "friendsofsymfony1/doctrine1": "^1.3",
+        "jpgraph/jpgraph": "^4.0",
+        "mpdf/mpdf": "^8.0"
+    },
+    "config": {
+        "vendor-dir": "lib/vendor/"
+    }
+}

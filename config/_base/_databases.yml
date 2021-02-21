@@ -1,0 +1,7 @@
+all:
+  doctrine:
+    class: sfDoctrineDatabase
+    param:
+      dsn: 'thisprovidername:host=thisservername;dbname=thisdatabasename'
+      username: thisusername
+      password: thisuserpassword

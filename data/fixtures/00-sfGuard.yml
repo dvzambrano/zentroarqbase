@@ -1,0 +1,132 @@
+sfGuardUser:
+  User_admin:
+    first_name:  Daniel
+    last_name:  Velazquez Zamora
+    email_address:  admin@domain.com
+    username:       admin
+    password:       admin
+    is_super_admin: true
+    Groups:         [AdminGroup]
+  User_advanced:
+    first_name:  Rafael
+    last_name:  Avila Gonzalez
+    email_address:  advanced@domain.com
+    username:       advanced
+    password:       advanced
+    Groups:         [AdvancedGroup]
+  User_basic:
+    first_name:  Maira
+    last_name:  Perez Ramos
+    email_address:  basic@domain.com
+    username:       basic
+    password:       basic
+    Groups:         [BasicGroup]
+
+EntityUserRelation:
+  User_admin:
+    entity_id: 1
+    sf_guard_user_id: 1
+
+
+sfGuardGroup:
+  AdminGroup:
+    name:           admin
+    description:    Administrador(a)
+    Permissions:    [manageconfiguration, managemodule, manageuser, manageperson, managelog, managefiles, managecharts, managecalendar, managecontacttype, manageentity]
+  AdvancedGroup:
+    name:           advanced
+    description:    Avanzado(a)
+    Permissions:    [manageconfiguration, managemodule, manageuser, managelog]
+  BasicGroup:
+    name:           basic
+    description:    Usuario(a)
+    Permissions:    [manageconfiguration]
+
+sfGuardPermission:
+  managemodule:
+    name:           managemodule
+    description:    'Administrar módulos'
+  managemoduleadd:
+    name:           managemoduleadd
+    description:    'Administrar módulos (adicionar)'
+  managemoduleedit:
+    name:           managemoduleedit
+    description:    'Administrar módulos (editar)'
+  managemoduledelete:
+    name:           managemoduledelete
+    description:    'Administrar módulos (eliminar)'
+    
+  manageuser:
+    name:           manageuser
+    description:    'Administrar usuarios'
+  manageuseradd:
+    name:           manageuseradd
+    description:    'Administrar usuarios (adicionar)'
+  manageuseredit:
+    name:           manageuseredit
+    description:    'Administrar usuarios (editar)'
+  manageuserdelete:
+    name:           manageuserdelete
+    description:    'Administrar usuarios (eliminar)'
+
+  manageperson:
+    name:           manageperson
+    description:    'Administrar personas'
+  managepersonadd:
+    name:           managepersonadd
+    description:    'Administrar personas (adicionar)'
+  managepersonedit:
+    name:           managepersonedit
+    description:    'Administrar personas (editar)'
+  managepersondelete:
+    name:           managepersondelete
+    description:    'Administrar personas (eliminar)'
+
+  managefiles:
+    name:           managefiles
+    description:    'Administrar archivos'
+
+  managelog:
+    name:           managelog
+    description:    'Administrar trazas'
+
+  managecharts:
+    name:           managecharts
+    description:    'Administrar graficos'
+
+  managecalendar:
+    name:           managecalendar
+    description:    'Administrar calendario'
+
+  manageconfiguration:
+    name:           manageconfiguration
+    description:    'Administrar configuracion global'
+    
+  managecontacttype:
+    name:           managecontacttype
+    description:    'Administrar tipos de contacto'
+  managecontacttypeadd:
+    name:           managecontacttypeadd
+    description:    'Administrar tipos de contacto (adicionar)'
+  managecontacttypeedit:
+    name:           managecontacttypeedit
+    description:    'Administrar tipos de contacto (editar)'
+  managecontacttypedelete:
+    name:           managecontacttypedelete
+    description:    'Administrar tipos de contacto (eliminar)'
+    
+  manageentity:
+    name:           manageentity
+    description:    'Administrar entidades'
+  manageentityadd:
+    name:           manageentityadd
+    description:    'Administrar entidades (adicionar)'
+  manageentityedit:
+    name:           manageentityedit
+    description:    'Administrar entidades (editar)'
+  manageentitydelete:
+    name:           manageentitydelete
+    description:    'Administrar entidades (eliminar)'
+  manageselfentity:
+    name:           manageselfentity
+    description:    'Administrar propia entidad'

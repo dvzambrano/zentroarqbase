@@ -1,0 +1,50 @@
+/*!
+ * Ext JS Library 3.3.1
+ * Copyright(c) 2006-2010 Sencha Inc.
+ * licensing@sencha.com
+ * http://www.sencha.com/license
+*/
+.x-panel-body{
+    background: white;
+    font: 11px Arial, Helvetica, sans-serif;
+}
+.thumb{
+    background:transparent;
+    padding: 3px;
+}
+.thumb img{
+    height: 60px;
+    width: 80px;
+}
+.thumb-wrap{
+    float: left;
+    margin: 4px;
+    margin-right: 0;
+    padding: 5px;
+}
+.thumb-wrap span{
+}
+
+.x-view-over{
+    border:1px solid #dddddd;
+    background: #efefef url(../js/extjs/resources/images/default/grid/row-over.gif) repeat-x left top;
+    padding: 4px;
+}
+
+.x-view-selected{
+    background: #eff5fb url(../js/extjs/resources/images/default/grid/selected.gif) no-repeat right bottom;
+    border:1px solid #99bbe8;
+    padding: 4px;
+}
+.x-view-selected .thumb{
+    background:transparent;
+}
+
+.loading-indicator {
+    font-size:11px;
+    background-image:url('../js/extjs/resources/images/default/grid/loading.gif');
+    background-repeat: no-repeat;
+    background-position: left;
+    padding-left:20px;
+    margin:10px;
+}

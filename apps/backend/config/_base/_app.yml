@@ -1,0 +1,7 @@
+all:
+  sf_guard_plugin:
+    remember_key_expiration_age:  2592000   # 30 dias en segundos
+    remember_cookie_name: CookiesystemnameRememberMe    # nombre para la cookie
+  sg_arq_base:
+    register_name: 'inbehalf'
+    register_code: regcode

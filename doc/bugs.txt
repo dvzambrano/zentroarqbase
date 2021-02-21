@@ -1,0 +1,146 @@
+Revisar los componentes combobox q se usan en interfaces de definir padres como este:
+new Ext.form.ComboBox({
+                    fieldLabel : bundle.getMsg('specialtyarea.field.parent'),
+                    store: this.comboStore,
+                    name: 'parentid',
+                    anchor:'-20',
+                    emptyText: bundle.getMsg('app.form.typehere'),
+                    minChars: config.app_characteramounttofind,
+                    displayField: 'name',
+                    typeAhead: false,
+                    loadingText: bundle.getMsg('app.msg.wait.searching'),
+                    pageSize: config.app_elementsongrid/2,
+                    hideTrigger:true,
+                    tpl: new Ext.XTemplate(
+                        '<tpl for="."><div class="search-item">',
+                        '<h3><span>{parent}</span>{name}</h3>',
+                        '{comment}',
+                        '</div></tpl>'
+                        ),
+                    itemSelector: 'div.search-item',
+                    listeners: {
+                        beforequery: function(queryEvent) {
+                            var node = window['SpecialtyareaApp'].gridPanel.getSelectionModel().getSelectedNodes();
+                            if (node && node.length>0){
+                                node = node[0];
+                                        
+                                var elements = new Array();
+                                var element = new Object;
+                                element.id = node.id;
+                                elements.push(element);
+                                        
+                                window['SpecialtyareaApp'].comboStore.baseParams.distinct = Ext.encode(elements);
+                            }
+                            this.setValue(queryEvent.query);
+                        },
+                        select: function(combo, record, index ){
+                            window['SpecialtyareaApp'].parentRecord = record;
+                            window['SpecialtyareaApp'].comboStore.baseParams.distinct = '';
+                            this.collapse();
+                        },
+                        blur: function(field) {		
+                            if(field.getRawValue() == '')
+                                window['SpecialtyareaApp'].parentRecord = false;
+                            else {
+                                var record = field.getStore().getAt(field.getStore().find('name',field.getRawValue(), 0, true, true));								 
+                                if(record && record.get('name') == field.getRawValue())
+                                    window['SpecialtyareaApp'].parentRecord = record;
+                                else 
+                                    window['SpecialtyareaApp'].parentRecord = false;
+                            }
+                            window['SpecialtyareaApp'].comboStore.baseParams.distinct = '';
+                        }
+                    }
+                })
+hay q eiminar el else del evento blur
+
+Cuando se guarda info de perfil desde el widget de admin.js se pierden las entidades q este usuario tenia
+No esta funcionando la foto con webcam en el gestor integral
+
+
+
+Revisar el modulo de modulos. Esta desestabilizando al guardar un modulo pivote de multientidad. Luegono se caragan los elementos del menu principal.
+No esta cargando los permisos del modulo cuando se da editar.
+
+
+Limpiar los distinct de las busquedas luego de slvado o eliminado un valor de formulario (ej en local del sist de planificacion)
+
+
+
+
+
+
+Cuando se pierde la sesion por inactividad y se llena un formulario se qued bloqueado y no da el error. Lo mismo si el form tiene combos
+Hacer tareas programadas o cron para reminders
+Incluir generacion de cofigos de barras para IDs
+
+
+Incluir validaciones de AK a lo q el usuario defina como PK.
+Añadir en el schema generado como unique: true los AK y los PK
+Se estan generando mal las interfaces basadas en arboles. Se genera un parent y un parentid
+Cuando se generan los idiomas para las interfaces deben ponerse los &acoute; en vez de las tildes
+Incluir en los actions.class q cuando se filtra pueda hacerse con excepciones usando el distinct
+Arreglar en la generacion de relaciones 1 a muchos q el foreignAlias sea el de la entidad generada y no el de la q tiene relacion
+Areglar funcionamiento de aplicar y aceptar segun el ejemplo de personas en el SGTCP
+
+
+
+
+
+
+
+PARA ENTREGAR PROYECTOS
+Revisar q este programada la seguridad en todos los applysecurity de los js
+Revisar q se este usando el deleteable en las interfaces para no permitir los borrados en cascada segun cada caso
+
+Exportar en sobre codigo fuente
+Generar checksum de la nueva version
+Reconstruir y cargar datos iniciales
+
+
+
+
+CODIGOS UTILES
+Cuando el servidor es linux (probado en zentyal) esta cadena es usado para el ldap
+CN=Users,DC=ciget,DC=cu
+
+Mensajes de campos unicos personalizados
+orderstatus.warning.changestatus.text "&iquest;Est&aacute; seguro(a) que desea cambiar del estado <b>{0}</b> a <b>{1}</b> la orden seleccionada?"
+msg: String.format(bundle.getMsg('orderstatus.warning.changestatus.text'), record.get('orderstatus'), newText),
+
+Tarjeta valida 4013200209774812
+
+
+
+
+DETALLES DE CONFIGURACION PARA FUNCIONAMIENTO DE SISTEMAS
+- Para poder trabajar con coexion a LDAP:
+    Intentar copiar libeay32.dll, ssleay32.dll y libsasl.dll de php a apache/bin. En caso de no funcionar deben copiarse todas las DLLs de php a apache/bin
+
+- Para poder guardar imagenes en la BD:
+    Editar el php.ini de php:
+        allow_url_fopen = On
+        post_max_size = 32M
+    Editar el my.ini de mysql:
+        max_allowed_packet = 5M
+
+
+
+
+COMO DEMOSTRAR QUE ES GENERADO POR SGArqBase
+- Las clases generadas tienen comentarios q incluyen lo siguiente:
+    /**
+    * Codigo fuente generado por el SGArqBase: Plataforma de construcción de Sistemas.
+    * @author     MSc. Donel Vázquez Zambrano
+    * @version    1.0.0
+    */
+- En la configuracion factories.yml del backend aparece una configuracion de mailer con cubandeveloper@googlemail.com
+- En la configuracion general properties.ini aparece lo siguiente:
+    name=SGArqBase o ArqBaseSistemaGestion
+    author=MSc. Donel Vazquez Zambrano
+    orm=Doctrine
+
+
+
+LEAKS
+db/request/method/checksum

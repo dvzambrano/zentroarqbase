@@ -1,0 +1,1 @@
+<object data="$file" type="text/html" codetype="application/pdf" class="object_pdf"></object>

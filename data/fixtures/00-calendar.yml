@@ -1,0 +1,253 @@
+Reminder:
+  ATTIME:
+    code: "<?php echo md5(strtoupper('En el momento de inicio')) ?>"
+    name: 'Al inicio'
+    comment: 'Avisar en el momento de inicio del evento'
+    value: 0
+    period: 1
+  I5TIME:
+    code: "<?php echo md5(strtoupper('5 minutos')) ?>"
+    name: '5 minutos'
+    comment: 'Avisar cinco minutos antes del inicio del evento'
+    value: 5
+    period: 1
+  I15TIME:
+    code: "<?php echo md5(strtoupper('15 minutos')) ?>"
+    name: '15 minutos'
+    comment: 'Avisar quince minutos antes del inicio del evento'
+    value: 15
+    period: 1
+  I30TIME:
+    code: "<?php echo md5(strtoupper('30 minutos')) ?>"
+    name: '30 minutos'
+    comment: 'Avisar media hora antes del inicio del evento'
+    value: 30
+    period: 1
+  H1TIME:
+    code: "<?php echo md5(strtoupper('1 hora')) ?>"
+    name: '1 hora'
+    comment: 'Avisar una hora antes del inicio del evento'
+    value: 1
+    period: 2
+  H2TIME:
+    code: "<?php echo md5(strtoupper('2 horas')) ?>"
+    name: '2 horas'
+    comment: 'Avisar dos horas antes del inicio del evento'
+    value: 2
+    period: 2
+  H12TIME:
+    code: "<?php echo md5(strtoupper('12 horas')) ?>"
+    name: '12 horas'
+    comment: 'Avisar doce horas antes del inicio del evento'
+    value: 12
+    period: 2
+  D1TIME:
+    code: "<?php echo md5(strtoupper('1 dia')) ?>"
+    name: '1 dia'
+    comment: 'Avisar un dia antes del inicio del evento'
+    value: 1
+    period: 3
+  D2TIME:
+    code: "<?php echo md5(strtoupper('2 dias')) ?>"
+    name: '2 dias'
+    comment: 'Avisar dos dias antes del inicio del evento'
+    value: 2
+    period: 3
+  W1TIME:
+    code: "<?php echo md5(strtoupper('1 semana')) ?>"
+    name: '1 semana'
+    comment: 'Avisar una semana antes del inicio del evento'
+    value: 1
+    period: 4
+  W2TIME:
+    code: "<?php echo md5(strtoupper('2 semanas')) ?>"
+    name: '2 semanas'
+    comment: 'Avisar dos semanas antes del inicio del evento'
+    value: 2
+    period: 4
+  M1TIME:
+    code: "<?php echo md5(strtoupper('1 mes')) ?>"
+    name: '1 mes'
+    comment: 'Avisar un mes antes del inicio del evento'
+    value: 1
+    period: 5
+  Y1TIME:
+    code: "<?php echo md5(strtoupper('1 año')) ?>"
+    name: '1 año'
+    comment: 'Avisar un año antes del inicio del evento'
+    value: 1
+    period: 6
+
+Calendar:
+  C1:
+    code: "<?php echo md5(strtoupper('Trabajo')) ?>"
+    name: 'Trabajo'
+    color: 6
+  C2:
+    code: "<?php echo md5(strtoupper('Casa')) ?>"
+    name: 'Casa'
+    color: 15
+  C3:
+    code: "<?php echo md5(strtoupper('Escuela')) ?>"
+    name: 'Escuela'
+    color: 26
+    
+Event:
+  VACATIONS:
+    code: "<?php echo md5(strtoupper('Vacaciones')) ?>"
+    name: 'Vacaciones'
+    comment: 'Tiempo de diversion...'
+    start: '<?php 
+      $today = date('Y-m-d'); 
+      $startdate = date_create_from_format('Y-m-d H:i', $today.' 00:00'); 
+      $startdate->sub(new DateInterval('P20DT10H')); 
+      echo $startdate->format('Y-m-d H:i:s') ?>'
+    end: '<?php 
+      $today = date('Y-m-d'); 
+      $enddate = date_create_from_format('Y-m-d H:i', $today.' 00:00'); 
+      $enddate->sub(new DateInterval('P10D')); 
+      $enddate->add(new DateInterval('PT15H')); 
+      echo $enddate->format('Y-m-d H:i:s') ?>'
+    Calendar: [C2]
+    Reminder: [ATTIME]
+  LUNCH:
+    code: "<?php echo md5(strtoupper('Almuerzo con Dcita')) ?>"
+    name: 'Almuerzo con Dcita'
+    comment: 'Debo estar una hora antes en el restaurant'
+    start: '<?php 
+      $today = date('Y-m-d'); 
+      $startdate = date_create_from_format('Y-m-d H:i', $today.' 00:00'); 
+      $startdate->add(new DateInterval('PT11H30M')); 
+      echo $startdate->format('Y-m-d H:i:s') ?>'
+    end: '<?php 
+      $today = date('Y-m-d'); 
+      $enddate = date_create_from_format('Y-m-d H:i', $today.' 00:00'); 
+      $enddate->add(new DateInterval('PT13H')); 
+      echo $enddate->format('Y-m-d H:i:s') ?>'
+    Calendar: [C1]
+    Reminder: [ATTIME]
+  DELIVERY:
+    code: "<?php echo md5(strtoupper('Pagar la electricidad')) ?>"
+    name: 'Pagar la electricidad'
+    start: '<?php 
+      $today = date('Y-m-d'); 
+      $startdate = date_create_from_format('Y-m-d H:i', $today.' 00:00'); 
+      $startdate->add(new DateInterval('PT15H')); 
+      echo $startdate->format('Y-m-d H:i:s') ?>'
+    end: '<?php 
+      $today = date('Y-m-d'); 
+      $enddate = date_create_from_format('Y-m-d H:i', $today.' 00:00'); 
+      $enddate->add(new DateInterval('PT15H')); 
+      echo $enddate->format('Y-m-d H:i:s') ?>'
+    Calendar: [C1]
+  BRITHDAY:
+    code: "<?php echo md5(strtoupper('Cumpleaños de Mayra')) ?>"
+    name: 'Cumpleaños de Mayra'
+    comment: 'Hay q comprar un regalo'
+    start: '<?php 
+      $today = date('Y-m-d'); 
+      $startdate = date_create_from_format('Y-m-d H:i', $today.' 00:00'); 
+      echo $startdate->format('Y-m-d H:i:s') ?>'
+    end: '<?php 
+      $today = date('Y-m-d'); 
+      $enddate = date_create_from_format('Y-m-d H:i', $today.' 00:00'); 
+      echo $enddate->format('Y-m-d H:i:s') ?>'
+    allday: 1
+    Calendar: [C2]
+  EXCERSICE:
+    code: "<?php echo md5(strtoupper('Hacer ejercicios')) ?>"
+    name: 'Hacer ejercicios'
+    start: '<?php 
+      $today = date('Y-m-d'); 
+      $startdate = date_create_from_format('Y-m-d H:i', $today.' 00:00'); 
+      $startdate->sub(new DateInterval('P12D')); 
+      echo $startdate->format('Y-m-d H:i:s') ?>'
+    end: '<?php 
+      $today = date('Y-m-d'); 
+      $enddate = date_create_from_format('Y-m-d H:i', $today.' 00:00'); 
+      $enddate->add(new DateInterval('P10D')); 
+      $enddate->sub(new DateInterval('PT1S')); 
+      echo $enddate->format('Y-m-d H:i:s') ?>'
+    allday: 1
+    Calendar: [C1]
+  HAIRCUT:
+    code: "<?php echo md5(strtoupper('Pelarme')) ?>"
+    name: 'Pelarme'
+    start: '<?php 
+      $today = date('Y-m-d'); 
+      $startdate = date_create_from_format('Y-m-d H:i', $today.' 00:00'); 
+      $startdate->add(new DateInterval('PT9H')); 
+      echo $startdate->format('Y-m-d H:i:s') ?>'
+    end: '<?php 
+      $today = date('Y-m-d'); 
+      $enddate = date_create_from_format('Y-m-d H:i', $today.' 00:00'); 
+      $enddate->add(new DateInterval('PT9H30M')); 
+      echo $enddate->format('Y-m-d H:i:s') ?>'
+    Calendar: [C2]
+  MEETING:
+    code: "<?php echo md5(strtoupper('Consejo de direccion')) ?>"
+    name: 'Consejo de direccion'
+    start: '<?php 
+      $today = date('Y-m-d'); 
+      $startdate = date_create_from_format('Y-m-d H:i', $today.' 00:00'); 
+      $startdate->sub(new DateInterval('P2D')); 
+      $startdate->add(new DateInterval('PT13H')); 
+      echo $startdate->format('Y-m-d H:i:s') ?>'
+    end: '<?php 
+      $today = date('Y-m-d'); 
+      $enddate = date_create_from_format('Y-m-d H:i', $today.' 00:00'); 
+      $enddate->sub(new DateInterval('P2D')); 
+      $enddate->add(new DateInterval('PT18H')); 
+      echo $enddate->format('Y-m-d H:i:s') ?>'
+    Calendar: [C1]
+  RESTING:
+    code: "<?php echo md5(strtoupper('Noche de peliculas')) ?>"
+    name: 'Noche de peliculas'
+    start: '<?php 
+      $today = date('Y-m-d'); 
+      $startdate = date_create_from_format('Y-m-d H:i', $today.' 00:00'); 
+      $startdate->add(new DateInterval('P2DT19H')); 
+      echo $startdate->format('Y-m-d H:i:s') ?>'
+    end: '<?php 
+      $today = date('Y-m-d'); 
+      $enddate = date_create_from_format('Y-m-d H:i', $today.' 00:00'); 
+      $enddate->add(new DateInterval('P2DT23H')); 
+      echo $enddate->format('Y-m-d H:i:s') ?>'
+    Calendar: [C2]
+  EVENT:
+    code: "<?php echo md5(strtoupper('Forum nacional')) ?>"
+    name: 'Forum nacional'
+    start: '<?php 
+      $today = date('Y-m-d'); 
+      $startdate = date_create_from_format('Y-m-d H:i', $today.' 00:00'); 
+      $startdate->add(new DateInterval('P8DT8H')); 
+      echo $startdate->format('Y-m-d H:i:s') ?>'
+    end: '<?php 
+      $today = date('Y-m-d'); 
+      $enddate =  
+      $enddate->add(new DateInterval('P10DT17H')); 
+      echo $enddate->format('Y-m-d H:i:s') ?>'
+    location: 'Ciudad de la Habana'
+    link: 'www.forum.cuba.cu'  
+    Calendar: [C3]
+
+
+
+#<?php for ($i = 1; $i <= 30; $i++): 
+#$today = date('Y-m-d H:i');
+#$startdate = date_create_from_format('Y-m-d H:i', $today);
+#$startdate->sub(new DateInterval('PT' .  rand(1, 500) . 'H'));
+#$enddate = date_create_from_format('Y-m-d H:i', $today);
+#$enddate->add(new DateInterval('PT' .  rand(1, 500) . 'H'));
+# ?>#
+#  E<?php echo $i ?>:
+#    code: "<?php echo md5(strtoupper('Evento '.$i)) ?>"
+#    name: '<?php echo 'Evento '.$i ?>'
+#    allday: 0
+#    start: '<?php echo $startdate->format('Y-m-d H:i:s') ?>'
+#    end: '<?php echo $enddate->format('Y-m-d H:i:s') ?>'
+#    Calendar: [C<?php echo rand(1, 3) ?>]
+#    Reminder: [ATTIME]
+#    location: 'Trabajo'
+#    link: 'www.cubansoftware.com'  
+#<?php endfor ?>  

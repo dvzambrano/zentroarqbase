@@ -1,0 +1,276 @@
+new Ext.ux.tree.TreeGrid({
+                id: 'gridPanel_Base',
+                rootVisible:false,
+                iconCls: Ext.ux.Icon('flag_orange'),
+							
+                region:'center',
+                title: config.app_showgridtitle ? bundle.getMsg("_base.grid.title") : '',
+                autoExpandColumn: '_basecolname',
+                enableDD: false,
+                useArrows: false,
+                lines: true,
+                containerScroll: true,
+                animate: true,
+                columnsText: bundle.getMsg('app.layout.columns'),
+                maskConfig: {
+                    msg: bundle.getMsg("app.layout.loading")+'...'
+                },
+                keys: [panelKeysMap],
+                
+                view: new Ext.grid.GroupingView(),
+                
+                plugins: [this.filters],
+
+                tools:[{
+                    id:'refresh',
+                    qtip: bundle.getMsg('app.languaje.refresh.label'),
+                    handler:function(event,toolEl,panel,tc){
+                        window['_BaseApp'].gridPanel.getSelectionModel().clearSelections();
+                        window['_BaseApp'].gridPanel.getRootNode().removeAll();
+                        window['_BaseApp'].gridPanel.getLoader().load(window['_BaseApp'].gridPanel.getRootNode());
+                        
+                        window['_BaseApp'].gridPanel.expandBtn.setDisabled(false);
+                        window['_BaseApp'].gridPanel.collapseBtn.setDisabled(true);
+                    }
+                },{
+                    id:'print',
+                    qtip: bundle.getMsg('app.languaje.report.printview'),
+                    handler: function() {
+                        App.printView(window['_BaseApp'].gridPanel);
+                    }
+                }],
+				
+                columns: ['columns: []'],
+				
+                selModel: new Ext.tree.MultiSelectionModel({
+                    listeners: {
+                        selectionchange: App.selectionChange
+                    }
+                }),
+				
+                root: new Ext.tree.AsyncTreeNode({
+                    text: 'root',
+                    id:'NULL'
+                }),
+                
+                listeners: {
+                    click: function(node){
+                        App.selectionChange(node.getOwnerTree().getSelectionModel());
+                    },
+                    beforedblclick: function(){
+                        window['_BaseApp'].gridPanel.updateBtn.fireEvent('click', window['_BaseApp'].gridPanel.updateBtn);
+                        return false;
+                    },
+                    beforeexpandnode: function(node, deep, anim){
+                        node.getOwnerTree().collapseBtn.setDisabled(false);
+                        if(!node.leaf)
+                            node.setIconCls(Ext.ux.Icon(window['_BaseApp'].iconOpen, 'famfamfam'));
+                    },
+                    beforecollapsenode: function(node, deep, anim){
+                        node.getOwnerTree().expandBtn.setDisabled(false);
+                        node.setIconCls(Ext.ux.Icon(window['_BaseApp'].iconParent, 'famfamfam'));
+                    },
+                    filterupdate: function(){
+                        var text = App.getFiltersText(window['_BaseApp'].gridPanel);
+                        if(text && text!=''){
+                            Ext.fly(window['_BaseApp'].infoTextItem.getEl()).update(String.format(bundle.getMsg('app.form.filteringby'), text));
+                            window['_BaseApp'].infoTextItem.getEl().highlight('#FFFF66', {
+                                block:true
+                            });
+                        }
+                        else
+                            Ext.fly(window['_BaseApp'].infoTextItem.getEl()).update('');
+                    },
+                    containerclick: treeContainerClick
+                },
+				
+                loader: new Ext.tree.TreeLoader({
+                    baseParams: {
+                        component: 'tree',
+                        start: 0
+                    },
+                    dataUrl: config.app_host + '/_base/request/method/load',
+                    listeners: {
+                        load: function(treeLoader, node, response){
+                            node.getOwnerTree().treeGridSorter = new Ext.ux.tree.TreeGridSorter(node.getOwnerTree(), {
+                                property: node.getOwnerTree().columns[0].dataIndex
+                            });
+                            node.getOwnerTree().treeGridSorter.doSort(node);
+
+                            if(response.responseText.indexOf('signinForm')>0)
+                                showSesionExpiredMsg();
+                            
+                            for(var i = 0; i < node.childNodes.length; i++){
+                                if(!node.childNodes[i].attributes.deleteable)
+                                    node.childNodes[i].getUI().addClass('row-italic');
+                                if(node.childNodes[i].attributes && node.childNodes[i].attributes.customicon && node.childNodes[i].attributes.customicon!='')
+                                    node.childNodes[i].setIconCls(Ext.ux.Icon(node.childNodes[i].attributes.customicon, 'famfamfam'));
+                                
+                                if(node.childNodes[i].leaf && window['_BaseApp'].iconLeaf && window['_BaseApp'].iconLeaf!='')
+                                    node.childNodes[i].setIconCls(Ext.ux.Icon(window['_BaseApp'].iconLeaf, 'famfamfam'));
+                                if(!node.childNodes[i].leaf && window['_BaseApp'].iconParent && window['_BaseApp'].iconParent!='')
+                                    node.childNodes[i].setIconCls(Ext.ux.Icon(window['_BaseApp'].iconParent, 'famfamfam'));
+                            }
+                        }
+                    }
+                }),
+				
+                tbar: [{
+                    text: bundle.getMsg('app.form.add'),
+                    iconCls: Ext.ux.Icon('add'),
+                    ref: '../addBtn',
+                    listeners: {
+                        click: function(button, eventObject, hideApply, callback) {
+                            window['_BaseApp'].gridPanel.getSelectionModel().clearSelections();
+                            window['_BaseApp'].gridPanel.updateBtn.fireEvent('click', button, eventObject, hideApply, callback);
+                        }
+                    }
+                },{
+                    ref: '../updateBtn',
+                    text: bundle.getMsg('app.form.info'),
+                    disabled: true,
+                    iconCls: Ext.ux.Icon('information'),
+                    listeners: {
+                        click: function(button, eventObject, hideApply, callback) {
+                            App.mask.show();
+                            var nodes = window['_BaseApp'].gridPanel.getSelectionModel().getSelectedNodes();
+                            if (nodes.length == 1){
+                                var dr = new Ext.data.Record({
+                                    'forms: []'
+                                });
+
+                                if (!window['_BaseApp'].parentRecord){
+                                    window['_BaseApp'].parentRecord = new Object;
+                                    window['_BaseApp'].parentRecord.data = new Object;
+                                }
+                                window['_BaseApp'].parentRecord.id = nodes[0].attributes.parentid;
+                                window['_BaseApp'].parentRecord.data.path = nodes[0].parentNode.getPath();
+                                window['_BaseApp'].formPanel.getForm().loadRecord(dr);
+                            }
+                            window['_BaseApp'].showWindow(button.getEl(), hideApply, callback);
+                            App.mask.hide();
+                        }
+                    }
+                },{
+                    ref: '../removeBtn',
+                    text: bundle.getMsg('app.form.delete'),
+                    disabled: true,
+                    iconCls: Ext.ux.Icon('delete'),
+                    listeners: {
+                        click: function(button, eventObject, callback) {
+                            Ext.defer(function(){
+                                Ext.Msg.show({
+                                    title: bundle.getMsg('app.msg.warning.title'),
+                                    msg: bundle.getMsg('app.msg.warning.deleteselected.text'),
+                                    buttons: Ext.Msg.YESNO,
+                                    fn: function(btn, text){
+                                        if (btn == 'yes'){
+                                            var nodes = window['_BaseApp'].gridPanel.getSelectionModel().getSelectedNodes();
+
+                                            var array = new Array();
+                                            for (var i=0; i<nodes.length; i++)
+                                                array.push(nodes[i].id);
+
+                                            new Ext.data.Connection().request({
+                                                url: config.app_host + '/_base/request/method/delete',
+                                                params: {
+                                                    ids: Ext.encode(array)
+                                                },
+                                                failure: requestFailed,
+                                                success: requestSuccessful,
+                                                callback : function(options, success, response) {
+                                                    for (var i=0; i<nodes.length; i++){
+                                                        nodes[i].unselect();
+                                                        var el = Ext.fly(nodes[i].ui.elNode);
+                                                        if(el)
+                                                            el.ghost('l', {
+                                                                callback: nodes[i].remove, 
+                                                                scope: nodes[i], 
+                                                                duration: .4
+                                                            });
+                                                    }
+                                                    if(callback){
+                                                        if(callback.fn)
+                                                            callback.fn(callback.params);
+                                                        else
+                                                            callback();
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    },
+                                    animEl: 'elId',
+                                    icon: Ext.MessageBox.QUESTION
+                                });
+                            }, 100, this);
+                        }
+                    }
+                },'->','-',{
+                    ref: '../expandBtn',
+                    iconCls: Ext.ux.Icon('expand-all', 'myicons'),
+                    tooltip: bundle.getMsg('app.form.expandall'),
+                    listeners: {
+                        click: function() {
+                            var nodes = window['_BaseApp'].gridPanel.getSelectionModel().getSelectedNodes();
+                            if(nodes.length>0)
+                                for(var i = 0; i < nodes.length; i++)
+                                    nodes[i].expand(true);
+                            else{
+                                window['_BaseApp'].gridPanel.expandAll();
+                                window['_BaseApp'].gridPanel.expandBtn.setDisabled(true);
+                                window['_BaseApp'].gridPanel.collapseBtn.setDisabled(false);
+                            }
+                        }
+                    }
+                },{
+                    ref: '../collapseBtn',
+                    disabled: true,
+                    iconCls: Ext.ux.Icon('collapse-all', 'myicons'),
+                    tooltip: bundle.getMsg('app.form.collapseall'),
+                    listeners: {
+                        click: function() {
+                            var nodes = window['_BaseApp'].gridPanel.getSelectionModel().getSelectedNodes();
+                            if(nodes.length>0)
+                                for(var i = 0; i < nodes.length; i++)
+                                    nodes[i].collapse(true);
+                            else {
+                                window['_BaseApp'].gridPanel.collapseAll();
+                                window['_BaseApp'].gridPanel.expandBtn.setDisabled(false);
+                                window['_BaseApp'].gridPanel.collapseBtn.setDisabled(true);
+                            }
+                        }
+                    }
+                }],
+				
+                bbar: new Ext.PagingToolbar({
+                    pageSize: Number.MAX_VALUE,
+                    store: this.store,
+                    items:[{
+                        tooltip: bundle.getMsg('app.form.clearfilters'),
+                        iconCls: Ext.ux.Icon('table_lightning'),
+                        handler: function () {
+                            window['_BaseApp'].gridPanel.filters.clearFilters();
+                            Ext.fly(window['_BaseApp'].infoTextItem.getEl()).update('');
+                            window['_BaseApp'].gridPanel.getSelectionModel().clearSelections();
+                        } 
+                    },'-', this.infoTextItem],
+                    doRefresh : function(){
+                        window['_BaseApp'].gridPanel.getLoader().load(window['_BaseApp'].gridPanel.getRootNode());
+                        
+                        window['_BaseApp'].gridPanel.expandBtn.setDisabled(false);
+                        window['_BaseApp'].gridPanel.collapseBtn.setDisabled(true);
+                    },
+                    displayInfo: true,
+                    displayMsg: bundle.getMsg('app.bbar.msg'),
+                    emptyMsg: bundle.getMsg('app.bbar.msg'),
+                    listeners: {
+                        render: function(toolbar) {
+                            toolbar.items.items[4].setDisabled(true);
+                        }
+                    }
+                })
+            });
+            
+            this.iconParent = 'book';
+            this.iconLeaf = 'book';
+            this.iconOpen = 'book_open';

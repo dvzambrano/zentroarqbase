@@ -1,0 +1,3 @@
+public static function getByParent($filters = array(), $checkeable = false) {
+        return BaseTable::getByParent(self::table, $filters, $checkeable);
+    }

@@ -1,0 +1,7 @@
+all:
+  sf_guard_plugin:
+    remember_key_expiration_age:  2592000   # 30 dias en segundos
+    remember_cookie_name: Cookie114165E565957764F1A4A54E0EB54750RememberMe    # nombre para la cookie
+  sg_arq_base:
+    register_name: 'Donel Vazquez Zambrano'
+    register_code: DCA5-A4E5-FBD7-F048-BF7C-FAAC-2000-3959-2000-6675-8B19-F997

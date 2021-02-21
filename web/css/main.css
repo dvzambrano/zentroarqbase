@@ -1,0 +1,250 @@
+/*!
+ * Ext JS Library 3.3.1
+ * Copyright(c) 2006-2010 Sencha Inc.
+ * licensing@sencha.com
+ * http://www.sencha.com/license
+*/
+body {
+    font-family:helvetica,tahoma,verdana,sans-serif;
+    padding:20px;
+    padding-top:32px;
+    font-size:13px;
+    background-color:#fff !important;
+}
+p {
+    margin-bottom:15px;
+}
+h1 {
+    font-size:large;
+    margin-bottom:20px;
+}
+h2 {
+    font-size:14px;
+    color:#333;
+    font-weight:bold;
+    margin:10px 0;
+}
+.example-info{
+    width:150px;
+    border:1px solid #c3daf9;
+    border-top:1px solid #DCEAFB;
+    border-left:1px solid #DCEAFB;
+    background:#ecf5fe url( info-bg.gif ) repeat-x;
+    font-size:10px;
+    padding:8px;
+}
+pre.code{
+    background: #F8F8F8;
+    border: 1px solid #e8e8e8;
+    padding:10px;
+    margin:10px;
+    margin-left:0px;
+    border-left:5px solid #e8e8e8;
+    font-size: 12px !important;
+    line-height:14px !important;
+}
+.msg .x-box-mc {
+    font-size:14px;
+}
+#msg-div {
+    position:absolute;
+    left:35%;
+    top:10px;
+    width:250px;
+    z-index:20000;
+}
+.x-grid3-row-body p {
+    margin:5px 5px 10px 5px !important;
+}
+
+.row-red .x-grid3-cell-inner{
+    color: red;
+    font-weight:bold;
+}
+.row-gray .x-grid3-cell-inner{
+    color: gray;
+}
+
+.row-italic .x-treegrid-col{
+    font-style: italic;
+}
+.row-italic .x-grid3-cell-inner{
+    font-style: italic;
+}
+
+.row-background-red .x-treegrid-col{
+    background-color: #FFA6A6;
+}
+.row-background-red .x-grid3-cell-inner{
+    background-color: #FFA6A6;
+}
+
+.row-background-blue .x-treegrid-col{
+    background-color: #bcd2ef;
+}
+.row-background-blue .x-grid3-cell-inner{
+    background-color: #bcd2ef;
+}
+
+#customheader {
+    background: #7F99BE url(../images/header-background.png) repeat-x center;
+}
+#customheader h1 {
+    font-size: 16px;
+    color: #fff;
+    font-weight: normal;
+    padding: 5px 10px;
+}
+
+
+/* -- id styles ------------------------------------- */
+
+#frame {
+    margin: 20px auto;
+    width: 650px;
+    padding: 20px;
+}
+
+#frame form {
+    text-align: left;
+}
+
+/* -- class styles ---------------------------------- */
+
+.outline {
+    border: 1px solid #cccccc;
+    background: #ffffff;
+    padding: 2px;
+    text-align: center;
+    font-size: 17px;
+}
+
+
+
+.customBg {
+    background-color: transparent;
+}
+
+
+
+
+.whoInfo{
+    cursor: default;
+    font-size: 12px;
+    padding: 5px;
+}
+.whoAvatar {
+    border: 1px solid #99BBE8;
+    float: right;
+    height: 64px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    width: 64px;
+}
+.whoUser {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+.whoGroup {
+    font-size: 10px;
+    height: 16px;
+    line-height: 16px;
+}
+.whoGroupUser {
+    background: url("../img/icons/bullet_blue.png") no-repeat scroll 0 1px #FFFFFF;
+    font-size: 10px;
+    height: 16px;
+    line-height: 16px;
+    padding-left: 16px !important;
+}
+.whoMail {
+    font-size: 10px;
+    height: 16px;
+    line-height: 16px;
+    margin-right: 4px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.whoMail a {
+    color: #000000;
+    text-decoration: underline;
+}
+
+
+.task-complete{
+    text-decoration: line-through;
+}
+
+
+
+/* shortcuts for webtop */
+#config-shortcut img {
+    width:48px;
+    height:48px;
+    background-image: url(../images/webtop/shortcuts/config.png);
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/webtop/shortcuts/config.png', sizingMethod='scale');
+}
+#charts-shortcut img {
+    width:48px;
+    height:48px;
+    background-image: url(../images/webtop/shortcuts/charts.png);
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/webtop/shortcuts/charts.png', sizingMethod='scale');
+}
+#reminders-shortcut img {
+    width:48px;
+    height:48px;
+    background-image: url(../images/webtop/shortcuts/reminders.png);
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/webtop/shortcuts/reminders.png', sizingMethod='scale');
+}
+#calendars-shortcut img {
+    width:48px;
+    height:48px;
+    background-image: url(../images/webtop/shortcuts/calendars.png);
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/webtop/shortcuts/calendars.png', sizingMethod='scale');
+}
+#users-shortcut img {
+    width:48px;
+    height:48px;
+    background-image: url(../images/webtop/shortcuts/users.png);
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/webtop/shortcuts/users.png', sizingMethod='scale');
+}
+#effects-shortcut img {
+    width:48px;
+    height:48px;
+    background-image: url(../images/webtop/shortcuts/effects.png);
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/webtop/shortcuts/effects.png', sizingMethod='scale');
+}
+#logs-shortcut img {
+    width:48px;
+    height:48px;
+    background-image: url(../images/webtop/shortcuts/logs.png);
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/webtop/shortcuts/logs.png', sizingMethod='scale');
+}
+#explorer-shortcut img {
+    width:48px;
+    height:48px;
+    background-image: url(../images/webtop/shortcuts/explorer.png);
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/webtop/shortcuts/explorer.png', sizingMethod='scale');
+}
+#logout-shortcut img {
+    width:48px;
+    height:48px;
+    background-image: url(../images/webtop/shortcuts/logout.png);
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/webtop/shortcuts/logout.png', sizingMethod='scale');
+}
+#modules-shortcut img {
+    width:48px;
+    height:48px;
+    background-image: url(../images/webtop/shortcuts/modules.png);
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/webtop/shortcuts/modules.png', sizingMethod='scale');
+}
+
+
+/* row over bolded */
+.x-grid3-row-over .x-grid3-cell-inner {
+    font-weight: bold;
+}
+.x-tree-node .x-tree-node-over {
+    font-weight: bold;
+}

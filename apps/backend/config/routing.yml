@@ -1,0 +1,37 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+# default rules
+homepage:
+  url:   /
+  param: { module: admin, action: index }
+sf_guard_signin:
+  url:   /login.php
+  param: { module: sfGuardAuth, action: signin }
+sf_guard_signout:
+  url:   /logout.php
+  param: { module: sfGuardAuth, action: signout }
+feedviewer:
+  url:   /feedviewer.php
+  param: { module: feedviewer, action: index }
+webtop:
+  url:   /webtop.php
+  param: { module: webtop, action: index }
+install:
+  url:   /install.php
+  param: { module: admin, action: install }
+file:
+  url: /file.php
+  param: { module: file, action: request }
+service:
+  url: /service.php
+  param: { module: admin, action: request }
+
+# generic rules
+# please, remove them by adding more specific rules
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*

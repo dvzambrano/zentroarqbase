@@ -1,0 +1,6 @@
+{
+                    header: bundle.getMsg('_module.field._attribute'), 
+                    width: 160, 
+                    sortable: true, 
+                    dataIndex: '_attribute'
+                }

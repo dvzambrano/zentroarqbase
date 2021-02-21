@@ -1,0 +1,281 @@
+Metadata:
+  connection: doctrine
+  tableName: zab_metadata
+  columns:
+    name:
+      type: string(50)
+      notnull: true
+      unique: true
+      primary: true
+    comment:
+      type: string() 
+    value:
+      type: string() 
+    category:
+      type: string()
+    is_visible:
+      type: boolean
+      default: 1 
+
+Module:
+  connection: doctrine
+  tableName: zab_module
+  columns:
+    code:
+      type: string(50)
+      notnull: true
+      unique: true
+    name:
+      type: string(130)
+      notnull: true
+    nick:
+      type: string(130)
+      notnull: true
+    icon:
+      type: string(130)
+    comment:
+      type: string()
+    attributes:
+      type: string()
+    relations:
+      type: string()
+    is_active:
+      type: boolean
+      default: 1
+    is_multientity:
+      type: boolean
+      default: 0
+    is_multientidable:
+      type: boolean
+      default: 0
+    is_base:
+      type: boolean
+      default: 0
+    parentid:
+      type: integer()
+      notnull: false
+    path:
+      type: string()
+    increase:
+      type: string()
+  relations:
+    Module: { onDelete: CASCADE, local: parentid, foreign: id, foreignAlias: Modules }
+    DependentModules: { class: Module, refClass: ModuleDependencyRelation, local: module_id, foreign: dependency_id, type: many }
+    Permissions: { class: sfGuardPermission, local: module_id, foreign: permission_id, refClass: ModulePermission, foreignAlias: Modules}
+ModuleDependencyRelation:
+  connection: doctrine
+  tableName: zab_moduledependencyrelation
+  columns:
+    module_id:
+      type: integer
+      primary: true
+    dependency_id:
+      type: integer
+      primary: true
+  relations:
+    Module: { class: Module, onDelete: CASCADE, local: module_id, foreign: id, type: one }
+    Dependency: { class: Module, onDelete: CASCADE, local: dependency_id, foreign: id, type: one }
+ModulePermission:
+  connection: doctrine
+  tableName: zab_modulepermission
+  columns:
+    module_id:
+      type: integer
+      primary: true
+    permission_id:
+      type: integer
+      primary: true
+  relations:
+    Module:
+      class: Module
+      local: module_id
+      onDelete: CASCADE
+    Permission:
+      class: sfGuardPermission
+      local: permission_id
+      onDelete: CASCADE
+
+Person:
+  connection: doctrine
+  tableName: zab_person
+  columns:
+    code:
+      type: string(50)
+      notnull: false
+      unique: true
+    comment:
+      type: string()
+    picture:
+      type: string()
+    profile:
+      type: string()
+    sf_guard_user_id:
+      type: integer
+  relations:
+    sfGuardUser: { onDelete: CASCADE, local: sf_guard_user_id, foreign: id }
+
+File:
+  connection: doctrine
+  tableName: zab_file
+  columns:
+    code:
+      type: string(50)
+      notnull: true
+      unique: true
+    name:
+      type: string(130)
+      notnull: true
+    url:
+      type: string()
+    content:
+      type: clob
+      
+Reminder:
+  connection: doctrine
+  tableName: zab_reminder
+  columns:
+    code:
+      type: string(50)
+      notnull: true
+      unique: true
+    name:
+      type: string(130)
+      notnull: true
+    comment:
+      type: string()
+    value:
+      type: integer
+    period:
+      type: integer
+      default: 0    
+Calendar:
+  connection: doctrine
+  tableName: zab_calendar
+  columns:
+    code:
+      type: string(50)
+      notnull: true
+      unique: true
+    name:
+      type: string(130)
+      notnull: true
+    comment:
+      type: string()
+    color:
+      type: integer
+      default: 0
+Event:
+  connection: doctrine
+  tableName: zab_event
+  columns:
+    code:
+      type: string(50)
+      notnull: true
+      unique: true
+    name:
+      type: string(130)
+      notnull: true
+    comment:
+      type: string()
+    allday:
+      type: boolean
+      default: 0
+    start:
+      type: datetime
+      notnull: true
+    end:
+      type: datetime
+      notnull: true
+    calendarid:
+      type: integer
+    reminderid:
+      type: integer
+    location:
+      type: string()
+    link:
+      type: string()
+  relations:
+    Calendar: { onDelete: CASCADE, local: calendarid, foreign: id, foreignAlias: Events }
+    Reminder: { onDelete: CASCADE, local: reminderid, foreign: id, foreignAlias: Events }
+
+Note:
+  connection: doctrine
+  tableName: zab_note
+  actAs: { Timestampable: ~ }
+  columns:
+    comment:
+      type: clob
+    amount:
+      type: decimal
+    json:
+      type: clob
+    person_id:
+      type: integer
+    parentid:
+      type: integer
+    entityid:
+      type: string()
+    entity:
+      type: string()
+    increase:
+      type: string()
+  relations:
+    Person: { onDelete: CASCADE, local: person_id, foreign: id, foreignAlias: Notes }
+    Note: { onDelete: CASCADE, local: parentid, foreign: id, foreignAlias: RelatedNotes }
+
+Contacttype:
+  connection: doctrine
+  tableName: zab_contacttype
+  columns:
+    code:
+      type: string(50)
+      notnull: true
+      unique: true
+    name:
+      type: string(130)
+      notnull: true
+    comment:
+      type: string()
+      notnull: false
+
+Entity:
+  connection: doctrine
+  tableName: zab_entity
+  columns:
+    code:
+      type: string(50)
+      notnull: true
+      unique: true
+    name:
+      type: string(200)
+      notnull: true
+    comment:
+      type: string()
+    logo:
+      type: string()
+    images:
+      type: string()
+    path:
+      type: string()
+    parentid:
+      type: integer()
+      notnull: false
+    profile:
+      type: string
+  relations:
+    Entity: { onDelete: CASCADE, local: parentid, foreign: id, foreignAlias: Entities }
+    Users: { class: sfGuardUser, refClass: EntityUserRelation, local: entity_id, foreign: sf_guard_user_id, type: many }
+
+EntityUserRelation:
+  connection: doctrine
+  tableName: zab_entityuserrelation
+  columns:
+    entity_id:
+      type: integer
+      primary: true
+    sf_guard_user_id:
+      type: integer
+      primary: true
+  relations:
+    sfGuardUser: { class: sfGuardUser, onDelete: CASCADE, local: sf_guard_user_id, foreign: id, type: one }
+    Entity: { class: Entity, onDelete: CASCADE, local: entity_id, foreign: id, type: one }

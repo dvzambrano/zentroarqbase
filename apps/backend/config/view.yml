@@ -1,0 +1,20 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/13-View
+
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    #title:        symfony project
+    #description:  symfony project
+    #keywords:     symfony, project
+    #language:     en
+    #robots:       index, follow
+
+  stylesheets:    [main.css, ../js/extjs/resources/css/ext-all.css]
+
+  javascripts:    [extjs/adapter/ext/ext-base-debug.js, extjs/ext-all-debug.js, util/system.js, util/form/form.js, util/util.js, util/form/Base.js, bundle/Bundle.js, bundle/PropertyReader.js, extjs/locale/ext-lang-es.js]
+
+  has_layout:     true
+  layout:         layout

@@ -1,0 +1,6 @@
+this.filters = new Ext.ux.grid.GridFilters({
+                encode: true,
+                local: false,
+                menuFilterText: bundle.getMsg('app.languaje.find.label'),
+                filters: ['filters: []']
+            });

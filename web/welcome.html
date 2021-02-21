@@ -1,0 +1,315 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>SGArqBase: Plataforma de construcci&oacute;n de Sistemas</title>
+        <style type="text/css">
+
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                background: #fff;
+                color: #333;
+                font: normal 12px/1.3 Helvetica, sans-serif;
+                margin: 0 auto 0;
+                padding: 0;
+
+                -webkit-font-smoothing: antialiased;
+                text-rendering: optimizelegibility;
+            }
+
+            p {
+                margin: 0 0 1em;
+            }
+
+            a:link,
+            a:visited {
+                color: #0464BB;
+                text-decoration: none;
+            }
+
+            a:hover,
+            a:focus,
+            a:active {
+                color: #0464BB;
+                text-decoration: underline;
+            }
+
+            h1,h2,h3,h4,h5,h6 {
+                color: #222;
+                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                line-height: 1.1;    
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+
+            a#logo {
+                background: url(images/logo-white-transpatent.png) no-repeat 0 10%;
+                display: block;
+                height: 58px;
+                margin: 0 0 24px;
+                overflow: hidden;
+                padding: 0px;
+                text-indent: 150%;
+                white-space: nowrap;
+                width: 300px;
+            }
+
+            #header {
+                background: url(images/ext-comp.png) no-repeat 100% 48px;
+                height: 280px;
+                width: 800px;
+            }
+
+            #header h1 {
+                font-size: 32px;
+                margin: 45px 0 12px;
+                width: 350px;
+            }
+
+            #header p {
+                color: #555;
+                font-size: 16px;
+                line-height: 1.5;
+                width: 360px;
+            }
+
+            div.button-wrap {
+                padding: 0 0 1em;
+            }
+
+            .button:link,
+            .button:visited {
+                background: #2a64a6;
+                border: 1px solid;
+                border-color: transparent transparent rgba(0,0,0,0.4) transparent;
+                -webkit-border-radius: 13px;
+                -moz-border-radius:    13px;
+                border-radius:         13px;
+                color: #fff;
+                display: table-cell;
+                font-size: 13px;
+                font-weight: bold;
+                height: 13px;
+                padding: 2px 12px;
+                text-align: center;
+                text-decoration: none;
+                text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+                width: 114px;
+            }
+
+            .button:hover,
+            .button:focus {
+                background: #265B98;
+            }
+
+            .button:active {
+                background: #1F4C7E;
+                border-color: rgba(0,0,0,0.4) transparent transparent transparent;
+                text-decoration: none;
+                text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+
+            #header {
+                display: block;
+                margin: 0 auto;
+                padding: 0;
+            }
+
+            div#container {
+                margin: 0 auto;
+                overflow: hidden;
+                width: 800px;
+            }
+
+            .section {
+                float: left;
+                margin-right: 50px;
+                width: 233px;
+            }
+
+            .section h2 {
+                line-height: 30px;
+                margin: 0;
+                padding: 0;
+            }
+
+            #engage ul li {
+                height: 16px;
+                line-height: 16px;
+            }
+
+            #engage ul#social li a {
+                color: #777;
+                display: block;
+                height: 16px;
+                line-height: 16px;
+                margin: 6px 0 0;
+                padding-left: 22px;
+                text-decoration: none;
+            }
+
+            #engage ul#social li a span {
+                color: #0464BB;
+                font-weight: bold;
+                text-decoration: none;
+            }
+
+            #engage ul#social li a:hover {
+                color: #777;
+                text-decoration: none;
+            }
+
+            #engage ul#social li a:hover span {
+                color: #0464BB;
+                text-decoration: underline;
+            }
+
+            #engage a#join_us.button {
+                width: 148px;
+            }
+
+            #engage a#twitter {
+                background: url(images/social_sprite.gif) no-repeat 0 0;
+            }
+
+            #engage a#twitter:hover {
+                background: url(images/social_sprite.gif) no-repeat 0 -16px;
+            }
+
+            #engage a#tumblr {
+                background: url(images/social_sprite.gif) no-repeat 0 -32px;
+            }
+
+            #engage a#tumblr:hover {
+                background: url(images/social_sprite.gif) no-repeat 0 -48px;
+            }
+
+            #engage a#facebook {
+                background: url(images/social_sprite.gif) no-repeat 0 -64px;
+            }
+
+            #engage a#facebook:hover {
+                background: url(images/social_sprite.gif) no-repeat 0 -80px;
+            }
+
+            #engage a#linkedin {
+                background: url(images/social_sprite.gif) no-repeat 0 -128px;
+            }
+
+            #engage a#linkedin:hover {
+                background: url(images/social_sprite.gif) no-repeat 0 -144px;
+            }
+
+            #engage a#blog {
+                background: url(images/social_sprite.gif) no-repeat 0 -96px;
+            }
+
+            #engage a#blog:hover {
+                background: url(images/social_sprite.gif) no-repeat 0 -112px;
+            }
+
+            #license {
+                margin-right: 0;
+            }
+
+            ul,
+            ul li {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            #learn ul li,
+            #license ul li {
+                background: url(images/li.png) no-repeat 1px 2px;
+                padding: 0 0 0.5em 10px;
+                margin-left: 0px;
+            }
+
+            div#communication {
+                border-top: 1px solid #dfdfdf;
+                font-size: 13px;
+                height: 16px;
+                line-height: 16px;
+                margin: 24px 0;
+                overflow: hidden;
+                overflow: visible;
+                padding: 24px 0 0;
+            }
+
+            div#communication form {
+                float: left;
+                width: 550px;
+            }
+
+            div#communication p {
+                color: #222;
+                margin: 0;
+            }
+
+            div#communication p strong {
+                color: #555;
+            }
+
+            div#communication input#MERGE0 {
+                padding: 2px;
+            }
+
+            div#communication p#jobs {
+                float: right;
+                text-align: right;
+                width: 220px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <br/>
+        <div id="page">
+            <div id="header">
+                <h1>Bienvenido</h1>
+                <p>Gracias por usar nuestro sistema para construir plataformas inform&aacute;ticas para la gesti&oacute;n de entidades. </p>
+                <p>Esta plataforma ha sido desarrollada usando tecnolog&iacute;as libres soportadas por una comunidad de millones de desarrolladores de software.</p>
+            </div>
+            <div id="container">
+                <div id="learn" class="section">
+                    <h2>Aprender</h2>
+                    <p>Use los <a href="/uploads/docs/usermanual.pdf" target="_blank">archivos de ayuda</a> incluidos en esta distribuci&oacute;n del sistema.</p>
+                    <ul>
+                        <li><a href="/uploads/docs/usermanual.pdf" target="_blank">Manual de usuario</a></li>
+                        <li><a href="/uploads/docs/examples.pdf" target="_blank">Ejemplos</a></li>
+                    </ul>
+                    <p>Para mayor informaci&oacute;n contacte al proveedor de esta aplicaci&oacute;n.</p>
+                </div>
+
+                <div id="engage" class="section">
+                    <h2>Gestionar</h2>
+                    <p>Use el sistema libremente y permita que esta herramienta haga el trabajo complicado por Ud.</p>
+
+                    <ul id="social">
+                        <li><a href="http://twitter.com/cubansoftware" id="twitter" target="_blank"><span>Siganos</span> en Twitter</a></li>
+                        <li><a href="http://facebook.com/cubansoftware" id="facebook" target="_blank"><span>Convi&eacute;rtase en fan</span> en Facebook</a></li>
+                    </ul>
+                </div>
+
+                <div id="license" class="section">
+                    <h2>Licencia</h2>
+                    <p>Este sistema es <b>doblemente licenciado</b>:</p>
+                    <ul>
+                        <li>Uso libre de pago para pruebas en entornos locales o como promoci&oacute;n del proveedor de esta aplicaci&oacute;n.</li>
+                        <li>Debe pagarse licencia comercial para gestionar la planificaci&oacute;n de actividades durante m&aacute;s de un mes con este sistema.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>

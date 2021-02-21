@@ -1,0 +1,6 @@
+{
+                    xtype:'textfield',
+                    name: '_attribute',
+                    fieldLabel: bundle.getMsg('_module.field._attribute'), 
+                    anchor:'-20'
+                }

@@ -1,0 +1,12 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/08-Security
+
+default:
+  is_secure: true
+#  credentials: [[admin, advanced, basic]]
+request:
+  is_secure: false
+report:
+  is_secure: false
+install:
+  is_secure: false

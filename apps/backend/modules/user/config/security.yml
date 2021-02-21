@@ -1,0 +1,3 @@
+# Excepcion para la autenticacion de usuarios
+request:
+  is_secure: false

@@ -1,0 +1,24 @@
+h1 span {
+    font-size: 50%;
+    color: #9F2727;
+}
+#app-header {
+    text-align: center;
+    font-family: arial;
+}
+.app-center-header {
+    font-size: 13px;
+    text-align: center;
+    padding-left: 178px;
+    font-family: helvetica, arial, sans-serif;
+    color: #455C6F;
+}
+#app-calendar .x-panel-header {
+    padding-left: 0;
+}
+#app-header-content h1 {
+    float:left;
+    margin:8px 5px;
+    font-size: 18px;
+    color: #455C6F;
+}

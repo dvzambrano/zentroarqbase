@@ -1,0 +1,7 @@
+Entity:
+  Entity1:
+    code: "<?php echo md5(strtoupper('Unidad 1')) ?>"
+    name: 'Unidad 1'
+  Entity2:
+    code: "<?php echo md5(strtoupper('Unidad 2')) ?>"
+    name: 'Unidad 2'

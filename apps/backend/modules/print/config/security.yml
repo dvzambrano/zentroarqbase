@@ -1,0 +1,3 @@
+# Excepcion para la impresion
+default:
+  is_secure: false

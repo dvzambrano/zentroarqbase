@@ -1,0 +1,12 @@
+Person:
+  User_admin:
+    code: "81092719101"
+#    picture: '../uploads/avatars/cutemale.png'
+#    profile: '{"theme":"gray","customcolor":"[{\"calendar\":1,\"color\":\"F88015\"},{\"calendar\":2,\"color\":\"9D3283\"},{\"calendar\":3,\"color\":\"2951B9\"}]"}'
+    sfGuardUser: [User_admin]
+  User_advanced:
+    code: "69100514261"
+    sfGuardUser: [User_advanced]
+  User_basic:
+    code: "73062011688"
+    sfGuardUser: [User_basic]
